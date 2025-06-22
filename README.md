@@ -1,4 +1,4 @@
-# Ghost Admin API Integration
+# Ghost Integration
 
 This repository hosts a small console application that demonstrates how to automate common tasks using the [Ghost Admin API](https://ghost.org/docs/admin-api/). The commands provided here let you bulk import pages and members into a Ghost site.
 
