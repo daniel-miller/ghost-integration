@@ -1,25 +1,69 @@
 # Ghost Admin API Integration
 
-This repository contains the source code for a .NET 9 console application that demonstrates integration with the Ghost API. It imports a database of blog posts from a directory on the local file system, where each post is stored in a JSON file.
+This repository hosts a small console application that demonstrates how to automate common tasks using the [Ghost Admin API](https://ghost.org/docs/admin-api/). The commands provided here let you bulk import pages and members into a Ghost site.
 
-## About Ghost
+## Prerequisites
 
-[Ghost](https://ghost.org) is an open-source content management system that is especially well-suited to authoring and publishing web sites with a blog and/or newsletter focus. The Ghost [Admin API](https://ghost.org/docs/admin-api/) provides an excellent set of tools for bulk-import of content from other sites and systems.
+- [.NET 9 SDK](https://dotnet.microsoft.com/) installed and available on your `PATH`.
+- A Ghost instance with a valid **staff access token**.
 
-## Problem
+## Building
 
-Suppose you are ready to migrate the pages and blog posts into the Ghost platform from another website content management system. If your site is relatively small then you can manually copy and paste the content for each page and post, no problem. However, if your site is not small, then it might take hours, or days, or weeks, or longer (!) to migrate the content by hand - depending on the size of the size.
+Run the following command in the repository root to compile the project:
 
-## Solution
+```bash
+ dotnet build
+```
 
-After you export the content from your old site, you can use the Ghost Admin API to automate the process of recreating all your pages and posts in Ghost. 
+## Usage
 
-The source code here makes a few basic assumptions:
+The console project lives in the `src` folder. Use `dotnet run` with `--project src` to execute commands.
 
-* 
+### Import Pages
 
-## Getting Started with the Ghost API
+```bash
+dotnet run --project src -- import-pages --url <ghost-url> --key <staff-token> --input <pages.json>
+```
 
-## Code Highlights
+### Import Members
 
-## Next Steps
+```bash
+dotnet run --project src -- import-members --url <ghost-url> --key <staff-token> --input <members.json>
+```
+
+Both commands expect a JSON file with an array of objects.
+
+### Page JSON Structure
+
+`pages.json` should contain objects matching the following structure:
+
+```json
+[
+  {
+    "Path": "path/to/file",
+    "Name": "filename",
+    "Day": "dd",
+    "Month": "mm",
+    "Date": "2024-01-01T00:00:00Z",
+    "Title": "Page Title",
+    "Summary": "Brief summary",
+    "Content": "HTML content"
+  }
+]
+```
+
+### Member JSON Structure
+
+`members.json` must contain objects of this form:
+
+```json
+[
+  {
+    "Email": "member@example.com",
+    "Name": "Member Name",
+    "CreatedAt": "2024-01-01T00:00:00Z"
+  }
+]
+```
+
+Refer to the [Ghost Admin API documentation](https://ghost.org/docs/admin-api/) for details about authentication and available endpoints.
