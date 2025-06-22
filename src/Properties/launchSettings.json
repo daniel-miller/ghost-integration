@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GhostIntegration": {
+      "commandName": "Project",
+      "commandLineArgs": "--url YOUR_GHOST_URL --key YOUR_ACCESS_TOKEN --input YOUR_JSON_FILE"
+    }
+  }
+}
